@@ -1,0 +1,161 @@
+import discord
+from discord.ext import commands
+import asyncio
+import random
+import traceback
+import logging 
+bot = commands.Bot (command_prefix = "m. ")
+
+@bot.event
+async def on_ready():
+    print("Bot is ready")
+
+@bot.event
+async def on_message(message):
+    await bot.process_commands(message)
+    #if message.content.upper().startswith('!MUTE'):
+        #if 412281191123910656 in [role.id for role in message.author.roles]:
+            #await message.delete()
+            #args = message.content.split(" ")
+            #member = discord.utils.get(message.server.members, mention = args[1])
+            #role = discord.utils.get(message.server.roles, name="Muted")
+            #await client.add_roles(member, role)
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, discord.ext.commands.errors.CommandNotFound):
+        embed = discord.Embed(title="Error:",
+                              description="Command not found. Try **m.help**.",
+                              colour=0xe73c24)
+        await ctx.send(embed=embed)
+    else:
+        embed = discord.Embed(title="Error:",
+                              description=f"{error}",
+                              colour=0xe73c24)
+        await ctx.send(embed=embed)
+
+@bot.event
+async def on_member_join(member):
+    print(member,"Has joined")
+    await client.send_message(destination, content=None, *, tts=False, embed=None) , "new"),
+                             "Welcome to the Server, <@%s>. Enjoy you're stay!" % member.id)
+@bot.command()
+async def cookie(ctx):
+    """Do you want some cookies?"""
+    await ctx.send(":cookie:")
+   
+
+@bot.command()
+async def lenny(ctx):
+    """Lennies intensifies."""
+    await ctx.send("( ͡° ͜ʖ ͡°)")
+@bot.command()
+async def invite(ctx):
+    """No invite links are allowed since this bot is Server-only sorry."""
+    await ctx.send("```Here we go , you fuckin' randie ``` "
+                   "https://discord.gg/dQEatw4")
+@bot.command()
+async def Cordifyinv(ctx):
+    """Join my partnered MusicBot's server."""
+    await ctx.send("```Join my son's server``` "
+                    "https://discord.gg/9VUZpaW")
+@bot.command()
+async def AlphaServer(ctx):
+    """Join Alpha Wolf's Server."""
+    await ctx.send("```Join my Wolf's server```"
+                   "https://discord.gg/v2tbReT")
+@bot.command()
+async def developed(ctx):
+    """Who developed the bot?"""
+    await ctx.send("```Developed by B3YERN and his coding team.```")
+@bot.command()
+async def dice(ctx, dices):
+    """Let's play a dice coded-game."""
+    try:
+        rolls, limit = map(int, dices.split('d'))
+    except Exception:
+        await ctx.send('Format has to be in NdN!')
+        return
+    result = ', '.join(str(random.randint(1, limit)) for r in range(rolls))
+    await ctx.send('{} '.format(ctx.message.author.mention)+result)
+    
+    
+@bot.command()
+async def hello(ctx,member :discord.Member):
+    """Say hello to my son. """
+    await ctx.send('Hello : '+member.mention+' !')
+     
+@bot.command()
+async def playing(ctx,*game :str):
+    """Playing status for the bot {Bot-Owner Only}."""
+    print(*game)
+    await bot.change_presence(game=discord.Game(name=' '.join(game)))
+    
+
+@bot.command()
+async def prune(ctx, number: int, user: discord.Member = None):
+    """Deletes the specified amount of messages."""
+    lim = 0
+    if number is None:
+        await ctx.send("Please specify a number of messages to be deleted.")
+    else:
+        async for x in ctx.history(limit=5000, before=ctx.message.created_at):
+            if lim > number:
+                break
+            if user:
+                if x.author == user:
+                    await x.delete()
+                else:
+                    pass
+            else:
+                await x.delete()
+            lim += 1
+
+@bot.command()
+async def kick(ctx, *, member : discord.Member = None):
+    """Kick the client at the server."""
+    try:
+        await member.kick()
+        await ctx.send(ctx.message.author.mention + "Done, This motherfucker already wanted some smoke!")
+    except discord.errors.Forbidden:
+        await ctx.send('I don\'t have perms')
+        
+        
+        
+@bot.command()
+async def mute(ctx, member:discord.Member):
+    """Mute the client on the server."""
+    if "Furry boii (Manager)" in [role.name for role in ctx.author.roles]:
+        await ctx.message.delete()
+        role = discord.utils.get(ctx.guild.roles, name="Muted")
+        await member.add_roles(role)
+        overwrite = discord.PermissionOverwrite()
+        overwrite.send_messages = False
+        for each in ctx.guild.channels:
+                await each.set_permissions(member, overwrite=overwrite) 
+
+@bot.command()
+async def unmute(ctx, member:discord.Member):
+    """Unmute the client on the server."""
+    if "Furry boii (Manager)" in [role.name for role in ctx.author.roles]:
+        await ctx.message.delete()
+        role = discord.utils.get(ctx.guild.roles, name="Muted")
+        await member.remove_roles(role)
+        overwrite = discord.PermissionOverwrite()
+        overwrite.send_messages = None
+        for each in ctx.guild.channels:
+            await each.set_permissions(member, overwrite=overwrite)
+            
+@bot.command()
+async def ban (ctx, member:discord.Member):
+    """Bans the client with mention."""
+    await ctx.guild.ban(member)
+    await ctx.send(f":boot: {member.mention} has been banned!")
+    
+@bot.command()
+async def dolphin(ctx):
+    """Dolphin is love, Dolphin is life."""
+    await ctx.send("https://cdn.discordapp.com/attachments/411463762445598720/418670078951686144/dolphin.gif")
+    
+@bot.command()
+async def warn (ctx, member:discord.Member):
+    pass
