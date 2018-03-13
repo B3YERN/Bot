@@ -1,2 +1,2 @@
-# Bot
-Run.py
+# Memes Bot
+Not Ready
