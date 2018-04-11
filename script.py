@@ -282,5 +282,3 @@ async def say(ctx, *, message):
     await ctx.send(message)
    
 bot.run(os.getenv('TOKEN'))
-        
-worker: python script.py
