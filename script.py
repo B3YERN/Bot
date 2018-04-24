@@ -30,7 +30,12 @@ async def on_command_error(ctx, error):
 async def on_member_join(member):
     await member.guild.get_channel(416870728839856129).send(f"Welcome to the Server, <@{member.id}>. Enjoy your stay!")
     
-@bot.command
+
+@bot.event
+async def on_member_remove(member):
+    await member.guild.get_channel('416870728839856129').send(f"Just left **{ctx.guild}**, {member.mention}. Hope you enjoyed your stay!")
+    
+@bot.command()
 async def on_message_coins(ctx, coins):
     if str(User) in [role.name for role in ctx.author.roles]:
         if message.content == "rules": # # Say the rules! # #
@@ -236,6 +241,10 @@ async def stephenhawking(ctx):
     """ In love of Steven Hawkings 1942-2018 <3"""
     await ctx.send("Dad is going to heaven "
                    "https://cdn.discordapp.com/attachments/361128774928171008/423823373127122944/aa37207.png")
+    
+ @bot.command(pass_context=True)
+async def unban(ctx, member: discord.Member):
+    await ctx.guild.unban(member)
         
 @bot.command(pass_context=True)
 async def avatar(ctx,*,user:discord.Member=None):
