@@ -22,17 +22,7 @@ async def my_background_task():
             await client.send_message(channel, counter)
             await asyncio.sleep(60) # task runs every 60 seconds
 
-
-@bot.event
-async def on_message(message):
-    await bot.process_commands(message)
-    #if message.content.upper().startswith('!MUTE'):
-        #if 412281191123910656 in [role.id for role in message.author.roles]:
-            #await message.delete()
-            #args = message.content.split(" ")
-            #member = discord.utils.get(message.server.members, mention = args[1])
-            #role = discord.utils.get(message.server.roles, name="Muted")
-            #await client.add_roles(member, role)
+            
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, discord.ext.commands.errors.CommandNotFound):
@@ -51,16 +41,10 @@ async def on_command_error(ctx, error):
 async def on_member_join(member):
     await member.guild.get_channel(416870728839856129).send(f"Welcome to the Server, <@{member.id}>. Enjoy your stay!")
     
-@bot.command
-async def on_message_coins(ctx, coins):
-    if str(User) in [role.name for role in ctx.author.roles]:
-        if message.content == "rules": # # Say the rules! # #
-            if str(Admin) in [role.name for role in message.author.roles]:
-                rules = discord.Embed(title="- - - - - **RULES** - - - - -",
-                                      colour=0x992d22,
-                                 description="0.) READ ALL OF THE RULES \n \n 1.) Be Respectful to all beings \n \n 2.) Do not directly use profanity at another person and don't use it excessively \n \n 3.) Put links onl**")           
-            await message.channel.send(embed=rules)
-            await message.delete() 
+
+@bot.event
+async def on_member_remove(member):
+    await member.guild.get_channel(416870728839856129).send(f"Welcome to the Server, <@{member.id}>. Enjoy your stay!") 
 
     
 @bot.command()
@@ -80,17 +64,12 @@ async def invite(ctx):
                    "https://discord.gg/dQEatw4")
 
 @bot.command()
-async def AlphaServer(ctx):
-    """Join Alpha Wolf's Server."""
-    await ctx.send("```Join my Wolf's server```"
-                   "https://discord.gg/v2tbReT")
-@bot.command()
 async def developed(ctx):
     """Who developed the bot?"""
     await ctx.send("```Developed by B3YERN and his coding team.```")
 @bot.command()
-async def dice(ctx, dices):
-    """Let's play a dice coded-game."""
+async def RDNG(ctx, dices):
+    """Have some random generated numbers."""
     try:
         rolls, limit = map(int, dices.split('d'))
     except Exception:
@@ -99,11 +78,6 @@ async def dice(ctx, dices):
     result = ', '.join(str(random.randint(1, limit)) for r in range(rolls))
     await ctx.send('{} '.format(ctx.message.author.mention)+result)
     
-    
-@bot.command()
-async def hello(ctx,member :discord.Member):
-    """Say hello to my son. """
-    await ctx.send('Hello : '+member.mention+' !')
      
 @bot.command()
 @commands.is_owner()
@@ -160,7 +134,7 @@ async def kick(ctx, *, member : discord.Member = None):
         
 @bot.command()
 async def mute(ctx, member:discord.Member):
-    """Mute the client on the server."""
+    """Mutes the client on the server."""
     if "Furry boii (Manager)" in [role.name for role in ctx.author.roles]:
         await ctx.message.delete()
         role = discord.utils.get(ctx.guild.roles, name="Muted")
@@ -172,7 +146,7 @@ async def mute(ctx, member:discord.Member):
 
 @bot.command()
 async def unmute(ctx, member:discord.Member):
-    """Unmute the client on the server."""
+    """Unmutes the client on the server."""
     if "Furry boii (Manager)" in [role.name for role in ctx.author.roles]:
         await ctx.message.delete()
         role = discord.utils.get(ctx.guild.roles, name="Muted")
@@ -195,6 +169,7 @@ async def dolphin(ctx):
 
 @bot.command()
 async def warn(ctx, user: discord.Member, *, reason: str):
+    """Warns the client with mention"
     await ctx.send(f'{ctx.author.mention} You have successfully warned **{user.mention}** for `{reason}`.')
     await ctx.send(f'{user} You have been warned for `{reason}` in `{ctx.guild.name}`.')
     warning = open("warned.txt", "a+")
@@ -233,19 +208,6 @@ async def warns(self, ctx, user: discord.Member):
         await ctx.send("This user has **0** warns!")
     else:
         await ctx.send("This user has **{}** warns!".format(table.find_one(user=user.id)["warns"]))
-
-@bot.command()
-async def report(self, ctx, userToReport: discord.Member, reason: str):
-        """Reports a user to the moderators."""
-        config = dataset.connect("sqlite:///servers/{}.db".format(ctx.guild.id))["config"]
-        for user in ctx.guild.members:
-            if config.find_one(key="report_role") is None:
-                role = discord.utils.get(user.roles, name="Admin")
-            else:
-                role = discord.utils.get(user.roles, name=config.find_one(key="report_role")["value"])
-            if role:
-                message = """**User Reported!**\n**Reportee**: {}\n**User Reported**: {}\n**Reason**: {}\n**Channel**: {}""".format(ctx.author.display_name, userToReport.display_name, reason, ctx.channel.name)
-                await user.send(message)
                 
 @bot.command()
 @commands.cooldown(1,10.0,type=commands.BucketType.user)
@@ -278,4 +240,11 @@ async def avatar(ctx,*,user:discord.Member=None):
 async def say(ctx, *, message):
     await ctx.send(message)
    
+@bot.command()
+async def unban(ctx, member:discord.Member):
+    await ctx.guild.unban(member)
+    await ctx.send(f"Dumbass,{member.mention} has been unbanned!")
+
+
+
 bot.run(os.getenv('TOKEN'))
