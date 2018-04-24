@@ -242,7 +242,7 @@ async def stephenhawking(ctx):
     await ctx.send("Dad is going to heaven "
                    "https://cdn.discordapp.com/attachments/361128774928171008/423823373127122944/aa37207.png")
     
- @bot.command(pass_context=True)
+ @bot.command()
 async def unban(ctx, member: discord.Member):
     await ctx.guild.unban(member)
         
