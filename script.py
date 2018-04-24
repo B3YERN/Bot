@@ -180,7 +180,6 @@ async def warn(ctx, user: discord.Member, *, reason: str):
 @bot.command()
 @commands.is_owner()              
 async def die(ctx): 
-        """Safely shuts down the bot"""
 
         await ctx.send("Shutting down...")
         await bot.logout()        
