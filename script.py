@@ -229,10 +229,6 @@ async def avatar(ctx,*,user:discord.Member=None):
 async def say(ctx, *, message):
     await ctx.send(message)
    
-@bot.command()
-async def unban(ctx, member:discord.Member):
-    await ctx.guild.unban(member)
-
 
 
 bot.run(os.getenv('TOKEN'))
