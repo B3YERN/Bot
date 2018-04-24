@@ -232,7 +232,6 @@ async def say(ctx, *, message):
 @bot.command()
 async def unban(ctx, member:discord.Member):
     await ctx.guild.unban(member)
-    await ctx.send(f"Dumbass,{member.mention} has been unbanned!")
 
 
 
