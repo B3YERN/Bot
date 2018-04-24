@@ -12,16 +12,6 @@ client = discord.Client()
 async def on_ready():
     print("Bot is ready")
 
-@bot.event
-async def my_background_task():
-        await client.wait_until_ready()
-        counter = 0
-        channel = discord.Object(id='channel_id_here')
-        while not client.is_closed:
-            counter += 1
-            await client.send_message(channel, counter)
-            await asyncio.sleep(60) # task runs every 60 seconds
-
             
 @bot.event
 async def on_command_error(ctx, error):
