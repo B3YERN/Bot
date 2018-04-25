@@ -260,5 +260,10 @@ async def avatar(ctx,*,user:discord.Member=None):
 async def say(ctx, *, message):
     await ctx.send(message)
     
+@bot.command(pass_context=True)
+async def coinflip(ctx):
+    coin = ['Heads', 'Tails']
+    embed=discord.Embed(title='**Coinflip**', description='The coin landed on {}!'.format(random.choice(coin)), color=0x3b1261)
+    await ctx.channel.send(embed=embed)
 
 bot.run(os.getenv('TOKEN'))
