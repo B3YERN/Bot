@@ -72,8 +72,8 @@ async def developed(ctx):
     """Who developed the bot?"""
     await ctx.send("```Developed by B3YERN and his coding team.```")
 @bot.command()
-async def dice(ctx, dices):
-    """Let's play a dice coded-game."""
+async def RDNG(ctx, dices):
+    """Pick a random number generator."""
     try:
         rolls, limit = map(int, dices.split('d'))
     except Exception:
