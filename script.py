@@ -35,29 +35,8 @@ async def on_member_join(member):
 @bot.event
 async def on_member_remove(member):
     await member.guild.get_channel('416870728839856129').send(f"Just left **{ctx.guild}**, {member.mention}. Hope you enjoyed your stay!")
-    
-@bot.command()
-async def on_message_coins(ctx, coins):
-    if str(User) in [role.name for role in ctx.author.roles]:
-        if message.content == "rules": # # Say the rules! # #
-            if str(Admin) in [role.name for role in message.author.roles]:
-                rules = discord.Embed(title="- - - - - **RULES** - - - - -",
-                                      colour=0x992d22,
-                                 description="0.) READ ALL OF THE RULES \n \n 1.) Be Respectful to all beings \n \n 2.) Do not directly use profanity at another person and don't use it excessively \n \n 3.) Put links onl**")           
-            await message.channel.send(embed=rules)
-            await message.delete() 
 
-    
-@bot.command()
-async def cookie(ctx):
-    """Do you want some cookies?"""
-    await ctx.send(":cookie:")
-   
 
-@bot.command()
-async def lenny(ctx):
-    """Lennies intensifies."""
-    await ctx.send("( ͡° ͜ʖ ͡°)")
 @bot.command()
 async def invite(ctx):
     """No invite links are allowed since this bot is Server-only sorry."""
@@ -77,6 +56,7 @@ start_time = time.time()
 
 @bot.command(pass_context=True)
 async def uptime(ctx):
+    "Checks how long the bot ran"
     second = time.time() - start_time
     minute, second = divmod(second, 60)
     hour, minute = divmod(minute, 60)
@@ -96,12 +76,7 @@ async def RDNG(ctx, dices):
         return
     result = ', '.join(str(random.randint(1, limit)) for r in range(rolls))
     await ctx.send('{} '.format(ctx.message.author.mention)+result)
-    
-    
-@bot.command()
-async def hello(ctx,member :discord.Member):
-    """Say hello to my son. """
-    await ctx.send('Hello : '+member.mention+' !')
+ 
      
 @bot.command()
 @commands.is_owner()
@@ -212,14 +187,10 @@ async def die(ctx):
 async def meme(ctx):
     """You gonna enjoy some shitpost"""
     embed = discord.Embed(colour=000000)
-    embed.set_image(url=random.choice(["https://i.redd.it/136qbixg5ik01.png" , "https://cdn.discordapp.com/attachments/390888029037789187/420745936545775655/IMG_20171123_193527_619.jpg" , "https://cdn.discordapp.com/attachments/390888029037789187/420823120304275466/kre9hovmpri01.jpg" , "https://cdn.discordapp.com/attachments/390888029037789187/420223393560920074/42105cb3af307ce157e5f3acff328f80.jpg" , "https://i.redd.it/dslly23bfek01.png" , "https://i.redd.it/2ouazj8a7gk01.jpg" , "https://i.imgur.com/oiFXAJr.png" , "https://cdn.discordapp.com/attachments/390888029037789187/422061129292840961/image-3.jpg" ,"https://cdn.discordapp.com/attachments/236862934632890368/423497646226014218/image.png" , "https://i.imgur.com/X6Ft7Zw.jpg" , "https://cdn.discordapp.com/attachments/390888029037789187/425687359942819850/100_Years.png" , "https://cdn.discordapp.com/attachments/390888029037789187/425687968636862474/Screenshot_20180319-140055.jpg" , "https://cdn.discordapp.com/attachments/390888029037789187/425687968636862475/Screenshot_20180319-141208.jpg" , "https://cdn.discordapp.com/attachments/390888029037789187/425687969253294080/DW9eotsVQAAB6Th.jpg" , "https://cdn.discordapp.com/attachments/390888029037789187/425687969253294081/Screenshot_20180319-143414.jpg" , "https://cdn.discordapp.com/attachments/390888029037789187/425687970025308180/image-3.jpg" , "https://cdn.discordapp.com/attachments/390888029037789187/425687970025308181/a47Gxom_460s.png"  , "https://cdn.discordapp.com/attachments/390888029037789187/425687970570436608/Couldnt_be_Converted.jpg"  , "https://cdn.discordapp.com/attachments/390888029037789187/425688023959863316/Screenshot_20180315-124106.png"  , "https://cdn.discordapp.com/attachments/390888029037789187/425689424236642314/My_fetish.jpg"  , ""  , ""  , "" ]))
+    embed.set_image(url=random.choice(["https://i.redd.it/136qbixg5ik01.png" , "https://cdn.discordapp.com/attachments/390888029037789187/420745936545775655/IMG_20171123_193527_619.jpg" , "https://cdn.discordapp.com/attachments/390888029037789187/420823120304275466/kre9hovmpri01.jpg" , "https://cdn.discordapp.com/attachments/390888029037789187/420223393560920074/42105cb3af307ce157e5f3acff328f80.jpg" , "https://i.redd.it/dslly23bfek01.png" , "https://i.redd.it/2ouazj8a7gk01.jpg" , "https://i.imgur.com/oiFXAJr.png" , "https://cdn.discordapp.com/attachments/390888029037789187/422061129292840961/image-3.jpg" ,"https://cdn.discordapp.com/attachments/236862934632890368/423497646226014218/image.png" , "https://i.imgur.com/X6Ft7Zw.jpg" , "https://cdn.discordapp.com/attachments/390888029037789187/425687359942819850/100_Years.png" , "https://cdn.discordapp.com/attachments/390888029037789187/425687968636862474/Screenshot_20180319-140055.jpg" , "https://cdn.discordapp.com/attachments/390888029037789187/425687968636862475/Screenshot_20180319-141208.jpg" , "https://cdn.discordapp.com/attachments/390888029037789187/425687969253294080/DW9eotsVQAAB6Th.jpg" , "https://cdn.discordapp.com/attachments/390888029037789187/425687969253294081/Screenshot_20180319-143414.jpg" , "https://cdn.discordapp.com/attachments/390888029037789187/425687970025308180/image-3.jpg" , "https://cdn.discordapp.com/attachments/390888029037789187/425687970025308181/a47Gxom_460s.png"  , "https://cdn.discordapp.com/attachments/390888029037789187/425687970570436608/Couldnt_be_Converted.jpg"  , "https://cdn.discordapp.com/attachments/390888029037789187/425688023959863316/Screenshot_20180315-124106.png"  , "https://cdn.discordapp.com/attachments/390888029037789187/425689424236642314/My_fetish.jpg"  ,
+"https://imgur.com/0tnZ7nF.jpg"  , "https://b.thumbs.redditmedia.com/oLOHGAufL58oegCHbcbobtwiBykQmVrqav_G98tKmOI.jpg"  , "https://b.thumbs.redditmedia.com/LAVU1JKcXxmz0wOzSg_WYUGkw9saC2CY3zG936NOrpU.jpg" , "Fuck you and no memes for you tonight" , "I want to eat on the soft juicy part of the anus. The part that smells bad." , "" , "" , "" , "" , "" , "" ]))
     await ctx.send(embed=embed)
-@bot.command()
-async def joke(ctx):
-    """"""
-    await ctx.send(random.choice(["I want to eat on the soft juicy part of the anus. The part that smells bad." ,]))
-                                 
-                                 
+                                                                 
 @bot.command()
 async def warns(self, ctx, user: discord.Member):
     """Checks how many warns a user has"""
