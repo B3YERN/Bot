@@ -108,7 +108,7 @@ async def hello(ctx,member :discord.Member):
 async def play(ctx,*game :str):
     """Playing status for the bot {Bot-Owner Only}."""
     print(*game)
-    await bot.change_presence(activity=discord.Game(name="with dicks on your fingers"))
+    await bot.change_presence(activity=discord.Game(name="m. help | playing in gas chambers "))
     
 @bot.command()
 @commands.is_owner()
