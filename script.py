@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import asyncio
 import random
+import time
 import traceback
 import logging
 import os
@@ -66,11 +67,25 @@ async def invite(ctx):
 async def AlphaServer(ctx):
     """Join Alpha Wolf's Server."""
     await ctx.send("```Join my Wolf's server```"
-                   "https://discord.gg/v2tbReT")
+          "https://discord.gg/v2tbReT")
 @bot.command()
 async def developed(ctx):
     """Who developed the bot?"""
     await ctx.send("```Developed by B3YERN and his coding team.```")
+    
+start_time = time.time()
+
+@bot.command(pass_context=True)
+async def uptime(ctx):
+    second = time.time() - start_time
+    minute, second = divmod(second, 60)
+    hour, minute = divmod(minute, 60)
+    day, hour = divmod(hour, 24)
+    week, day = divmod(day, 7)
+    embed = discord.Embed(colour=0x2EFF00)
+    embed.add_field(name="__Bots Uptime!__", value=f"Week: {week},\nDay: {day},\nHours: {hour},\nMinutes: {minute},\nSeconds: {second}")
+    embed.set_footer(text="Memes Bot™ | Uptime Status!")
+    await ctx.send(embed=embed)
 @bot.command()
 async def RDNG(ctx, dices):
     """Pick a random number generator."""
