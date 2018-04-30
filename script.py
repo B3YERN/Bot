@@ -88,16 +88,19 @@ async def play(ctx,*game :str):
 @bot.command()
 @commands.is_owner()
 async def stream(ctx,* , title : str):
+    """Streaming status for the bot {Bot-Owner Only}."""
     await bot.change_presence(activity=discord.Streaming(name=title, url="https://twitch.tv/discordapp"))
     
 @bot.command()
 @commands.is_owner()
 async def listen(ctx,* ,title : str):
+     """Listening status for the bot {Bot-Owner Only}."""
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=title))
 
 @bot.command()
 @commands.is_owner()
 async def watch(ctx,* ,title : str):
+     """Watching status for the bot {Bot-Owner Only}."""
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=title))
 
 @bot.command()
@@ -168,6 +171,7 @@ async def dolphin(ctx):
 
 @bot.command()
 async def warn(ctx, user: discord.Member, *, reason: str):
+    """Warns the client straight away"""
     await ctx.send(f'{ctx.author.mention} You have successfully warned **{user.mention}** for `{reason}`.')
     await ctx.send(f'{user} You have been warned for `{reason}` in `{ctx.guild.name}`.')
     warning = open("warned.txt", "a+")
@@ -220,6 +224,7 @@ async def report(self, ctx, userToReport: discord.Member, reason: str):
 @bot.command()
 @commands.cooldown(1,10.0,type=commands.BucketType.user)
 async def ping(ctx):
+    """Checks how long did you and the bot reply"""
     resp = await ctx.send('Pong! Loading...')
     diff = resp.created_at - ctx.message.created_at
     await resp.edit(content=f'Pong! That took {1000*diff.total_seconds():.1f}ms.') 
@@ -232,6 +237,7 @@ async def stephenhawking(ctx):
         
 @bot.command(pass_context=True)
 async def avatar(ctx,*,user:discord.Member=None):
+    """Checks client's profile picture"""
     if user==None or type(user)==str:
         await ctx.send("Please Ping the user you wish to see the avatar of.")
     else:
@@ -250,6 +256,7 @@ async def say(ctx, *, message):
     
 @bot.command(pass_context=True)
 async def coinflip(ctx):
+    """Flip the coin for luck"""
     coin = ['Heads', 'Tails']
     embed=discord.Embed(title='**Coinflip**', description='The coin landed on {}!'.format(random.choice(coin)), color=0x3b1261)
     await ctx.channel.send(embed=embed)
