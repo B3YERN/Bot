@@ -101,7 +101,7 @@ async def listen(ctx,* ,title : str):
 @commands.is_owner()
 async def watch(ctx,* ,title : str):
      """Watching status for the bot {Bot-Owner Only}."""
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=title))
+     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=title))
 
 @bot.command()
 async def prune(ctx, number: int, user: discord.Member = None):
