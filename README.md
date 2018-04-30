@@ -1,2 +1,2 @@
 # Memes Bot
-Not Ready
+DO NOT COPY THE SOURCE CODES
