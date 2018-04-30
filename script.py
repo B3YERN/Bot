@@ -39,7 +39,7 @@ async def on_member_remove(member):
 
 @bot.command()
 async def invite(ctx):
-    """No invite links are allowed since this bot is Server-only sorry."""
+    """Join the Dev's server."""
     await ctx.send("```Here we go , you fuckin' randie ``` "
                    "https://discord.gg/dQEatw4")
 @bot.command()
@@ -229,11 +229,6 @@ async def ping(ctx):
     diff = resp.created_at - ctx.message.created_at
     await resp.edit(content=f'Pong! That took {1000*diff.total_seconds():.1f}ms.') 
     
-@bot.command()
-async def stephenhawking(ctx):
-    """ In love of Steven Hawkings 1942-2018 <3"""
-    await ctx.send("Dad is going to heaven "
-                   "https://cdn.discordapp.com/attachments/361128774928171008/423823373127122944/aa37207.png")
         
 @bot.command(pass_context=True)
 async def avatar(ctx,*,user:discord.Member=None):
