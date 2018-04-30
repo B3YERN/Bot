@@ -56,7 +56,7 @@ start_time = time.time()
 
 @bot.command(pass_context=True)
 async def uptime(ctx):
-    "Checks how long the bot ran"
+    """Checks how long the bot ran"""
     second = time.time() - start_time
     minute, second = divmod(second, 60)
     hour, minute = divmod(minute, 60)
