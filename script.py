@@ -95,7 +95,7 @@ async def stream(ctx,* , title : str):
 @commands.is_owner()
 async def listen(ctx,* ,title : str):
      """Listening status for the bot {Bot-Owner Only}."""
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=title))
+     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=title))
 
 @bot.command()
 @commands.is_owner()
