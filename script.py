@@ -8,6 +8,8 @@ import logging
 import os
 bot = commands.Bot (command_prefix = "m. ")
 client = discord.Client()
+bot.remove_command('help')
+
 
 @bot.event
 async def on_ready():
