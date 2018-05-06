@@ -249,6 +249,7 @@ async def avatar(ctx,*,user:discord.Member=None):
 
 @bot.command()
 async def say(ctx, *, message):
+    """Whatever the fuck you say, bot will say it aswell"""
     await ctx.send(message)
     
 @bot.command(pass_context=True)
@@ -257,5 +258,11 @@ async def coinflip(ctx):
     coin = ['Heads', 'Tails']
     embed=discord.Embed(title='**Coinflip**', description='The coin landed on {}!'.format(random.choice(coin)), color=0x3b1261)
     await ctx.channel.send(embed=embed)
+    
+@bot.command()
+async def help(ctx):
+    embed = discord.Embed(colour=0x80FF33)
+    await ctx.send("Here you go")
+    embed.add_field(name="Memes Bot's commands", value="Here you go".
 
 bot.run(os.getenv('TOKEN'))
