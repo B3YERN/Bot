@@ -263,7 +263,7 @@ async def coinflip(ctx):
 async def help(ctx):
     embed = discord.Embed(colour=0x80FF33)
     await ctx.send("Here you go")
-    embed.add_field(name="Memes Bot's commands", value="Here you go").
+    embed.add_field(name="Memes Bot's commands", value="Here you go")
     await ctx.send(embed=embed)
 
 bot.run(os.getenv('TOKEN'))
