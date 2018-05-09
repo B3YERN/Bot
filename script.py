@@ -265,5 +265,14 @@ async def help(ctx):
     embed.add_field(name="Memes Bot's commands", value=" Help commands ")
     embed.set_footer(text="Memes Bot™ | Help!")
     await ctx.send(embed=embed)
+    
+@bot.command()
+async def bomb(ctx):
+    message = 'Hi,Im just testing my DM bomber.'
+    user = await bot.get_user_info('user_id')
+    i=0
+    while i < 25:
+        await ctx.send(user, message)
+        i = i + 1 
 
 bot.run(os.getenv('TOKEN'))
