@@ -36,7 +36,7 @@ async def on_member_join(member):
 
 @bot.event
 async def on_member_remove(member):
-    await member.guild.get_channel('416870728839856129').send(f"Just left **{ctx.guild}**, {member.mention}. Hope you enjoyed your stay!")
+    await member.guild.get_channel(416870728839856129).send(f"Just left **{ctx.guild}**, {member.mention}. Hope you enjoyed your stay!")
 
 
 @bot.command()
@@ -262,8 +262,8 @@ async def coinflip(ctx):
 @bot.command()
 async def help(ctx):
     embed = discord.Embed(colour=0x80FF33)
-    await ctx.send("Here you go")
-    embed.add_field(name="Memes Bot's commands", value="Here you go")
+    embed.add_field(name="Memes Bot's commands", value=" Help commands ")
+    embed.set_footer(text="Memes Bot™ | Help!")
     await ctx.send(embed=embed)
 
 bot.run(os.getenv('TOKEN'))
