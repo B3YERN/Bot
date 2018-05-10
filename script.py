@@ -266,6 +266,16 @@ async def help(ctx):
     embed.set_footer(text="Memes Bot™ | Help!")
     await ctx.send(embed=embed)
     
+@bot.command(pass_context = True)
+async def infoembed(ctx, user: discord.Member):
+    embed = discord.Embed(colour=0x80FF33)
+
+    embed.set_author(name = "API Security Bot")
+    embed.add_field(name = "The user's name is: ", value = format(user.name))
+    embed.add_field(name = "The user's ID is: ", value = format(user.id))
+
+    await ctx.send(embed = embed)
+    
 @bot.command()
 async def bomb(ctx):
     message = 'Hi,Im just testing my DM bomber.'
