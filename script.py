@@ -267,7 +267,7 @@ async def help(ctx):
     await ctx.send(embed=embed)
     
 @bot.command(pass_context = True)
-async def infoembed(ctx, user: discord.Member):
+async def infoembed(ctx, member: discord.Member):
     embed = discord.Embed(colour=0x80FF33)
 
     embed.set_author(name = "API Security Bot")
