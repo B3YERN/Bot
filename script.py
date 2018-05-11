@@ -267,14 +267,17 @@ async def help(ctx):
     await ctx.send(embed=embed)
     
 @bot.command(pass_context = True)
-async def infoembed(ctx, member: discord.Member):
+async def infoembed(ctx, user: discord.Member):
     embed = discord.Embed(colour=0x80FF33)
 
-    embed.set_author(name = "API Security Bot")
+    embed.set_author(name = "API Security Bot | Statistics")
     embed.add_field(name = "The user's name is: ", value = format(user.name))
     embed.add_field(name = "The user's ID is: ", value = format(user.id))
+    embed.add_field(name = "The user's status is: ", value = format(user.status))
+    embed.add_field(name = "The user's highest role is: ", value = format(user.top_role))
+    embed.add_field(name = "the user joined at: ", value format(user.joined_at))
 
-    await ctx.send(embed = embed)
+    await ctx.send(embed=embed)
     
 @bot.command()
 async def bomb(ctx):
