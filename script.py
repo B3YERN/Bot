@@ -8,7 +8,6 @@ import logging
 import os
 bot = commands.Bot (command_prefix = "m. ")
 client = discord.Client()
-bot.remove_command('help')
 
 
 @bot.event
@@ -258,13 +257,6 @@ async def coinflip(ctx):
     coin = ['Heads', 'Tails']
     embed=discord.Embed(title='**Coinflip**', description='The coin landed on {}!'.format(random.choice(coin)), color=0x3b1261)
     await ctx.channel.send(embed=embed)
-    
-@bot.command()
-async def help(ctx):
-    embed = discord.Embed(colour=0x80FF33)
-    embed.add_field(name="Memes Bot's commands", value=" Help commands ")
-    embed.set_footer(text="Memes Bot™ | Help!")
-    await ctx.send(embed=embed)
     
     
 @bot.command()
