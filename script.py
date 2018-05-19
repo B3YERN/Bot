@@ -268,7 +268,7 @@ async def bomb(ctx):
         await ctx.send(user, message)
         i = i + 1 
 @bot.command(pass_context=True)
-async def type(ctx, user : discord.Member str):
+async def type(ctx, user : str):
     await ctx.send(f":typing: {} is typing...".format(user))
         
         
