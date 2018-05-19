@@ -269,7 +269,7 @@ async def bomb(ctx):
         i = i + 1 
 @bot.command(pass_context=True)
 async def type(ctx, user : str):
-    await ctx.send(f":typing: {} is typing...".format(user))
+    await ctx.send(":typing: {} is typing...".format(user))
         
         
         
