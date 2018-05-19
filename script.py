@@ -267,5 +267,11 @@ async def bomb(ctx):
     while i < 25:
         await ctx.send(user, message)
         i = i + 1 
-
+@bot.command(pass_context=True)
+async def type(ctx, user : discord.Member str):
+    await ctx.send(f":typing: {} is typing...".format(user))
+        
+        
+        
+        
 bot.run(os.getenv('TOKEN'))
