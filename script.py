@@ -11,7 +11,7 @@ client = discord.Client()
 bot.remove_command('help')
 async def loop():
     while True:
-        await bot.change_presence(game=discord.Game(name="m. help", url="https://twitch.tv/MMgamerBOT", type=1))
+        await bot.change_presence(game=discord.Game(name="m. help", url="https://twitch.tv/discordapp", type=1))
         await asyncio.sleep(5)
         await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="Moaning"))
         await asyncio.sleep(5)
