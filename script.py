@@ -8,7 +8,15 @@ import logging
 import os
 bot = commands.Bot (command_prefix = "m. ")
 client = discord.Client()
-
+bot.remove_command('help')
+async def loop():
+    while True:
+        await bot.change_presence(game=discord.Game(name="m. help", url="https://twitch.tv/MMgamerBOT", type=1))
+        await asyncio.sleep(5)
+        await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="Moaning"))
+        await asyncio.sleep(5)
+        await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="Meme Bot 2.0"))
+        await asyncio.sleep(5)
 
 @bot.event
 async def on_ready():
