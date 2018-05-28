@@ -211,15 +211,15 @@ async def ping(ctx):
     await resp.edit(content=f'Pong! That took {1000*diff.total_seconds():.1f}ms.') 
     
         
-@bot.command()
-async def avatar(ctx, user: discord.Member = None):
+@bot.command(pass_context=True)
+async def avatar(ctx,*,user:discord.Member=None):
     """Checks client's profile picture"""
-    if not user:
+    if user==None or type(user)==str:
         await ctx.send("Please Ping the user you wish to see the avatar of.")
     else:
         try:
             em=discord.Embed()
-            em.title=(ctx.user.display_name)
+            em.title=str(user)
             em.set_image(url=user.avatar_url)
             print(user.avatar_url)
             await ctx.send(embed=em)
