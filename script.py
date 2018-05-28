@@ -204,7 +204,7 @@ async def meme(ctx):
     await ctx.send(embed=embed)
 
 @bot.command()
-async def discord(ctx):
+async def dmeme(ctx):
     """Servers dying in everywhere"""
     embed = discord.Embed(colour=000000)
     embed.set_image(url=random.choice([""]))
