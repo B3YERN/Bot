@@ -228,7 +228,7 @@ async def avatar(ctx, user: discord.Member = None):
     else:
         try:
             em=discord.Embed()
-            em.title=str(user)
+            em.title=(ctx.user.display_name)
             em.set_image(url=user.avatar_url)
             print(user.avatar_url)
             await ctx.send(embed=em)
