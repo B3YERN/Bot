@@ -43,11 +43,6 @@ async def invite(ctx):
     await ctx.send("```Here we go , you fuckin' randie ``` "
                    "https://discord.gg/dQEatw4")
 @bot.command()
-async def AlphaServer(ctx):
-    """Join Alpha Wolf's Server."""
-    await ctx.send("```Join my Wolf's server```"
-          "https://discord.gg/v2tbReT")
-@bot.command()
 async def developed(ctx):
     """Who developed the bot?"""
     await ctx.send("```Developed by B3YERN and his coding team.```")
