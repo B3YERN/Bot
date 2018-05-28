@@ -221,9 +221,9 @@ async def ping(ctx):
     
         
 @bot.command()
-async def avatar(ctx,*,user:discord.Member=None):
+async def avatar(ctx,   user:discord.Member=None):
     """Checks client's profile picture"""
-    if user==None or type(user)==str:
+    if not user:
         await ctx.send("Please Ping the user you wish to see the avatar of.")
     else:
         try:
