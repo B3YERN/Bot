@@ -34,7 +34,7 @@ async def on_member_join(member):
 
 @bot.event
 async def on_member_remove(member):
-    await member.guild.get_channel(416870728839856129).send(f"Just left **{ctx.guild}**, {member.mention}. Hope you enjoyed your stay!")
+    await member.guild.get_channel(416870728839856129).send(f"Just left **{member.guild}**, {member.mention}. Hope you enjoyed your stay!")
 
 
 @bot.command()
