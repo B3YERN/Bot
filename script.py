@@ -235,7 +235,7 @@ async def dick_length(ctx):
 
 @bot.command(pass_context=True)
 async def type(ctx, user : str):
-    await ctx.send(":typing: {} is typing...".format(use))
+    await ctx.send(":typing: {} is typing...".format(user))
         
         
         
