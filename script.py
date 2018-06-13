@@ -230,14 +230,6 @@ async def coinflip(ctx):
 @bot.command()
 async def dick_length(ctx):
   """Check how long is your dick before it grows cancer"""
-  await ctx.send(f'Dick size of {ctx.author} is 8{"=" * random.randint(0, 50)}D')
-    
-
-@bot.command(pass_context=True)
-async def type(ctx, user : str):
-    await ctx.send("<a:typing:393848431413559296> {} is typing...".format(user))
-        
-        
-        
+  await ctx.send(f'Dick size of {ctx.author} is 8{"=" * random.randint(0, 50)}D')        
         
 bot.run(os.getenv('TOKEN'))
