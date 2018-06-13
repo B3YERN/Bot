@@ -29,12 +29,12 @@ async def on_command_error(ctx, error):
 
 @bot.event
 async def on_member_join(member):
-    await member.guild.get_channel(416870728839856129).send(f"Welcome to the Server, <@{member.id}>. Enjoy your stay!")
+    await member.guild.get_channel(416870728839856129)(f"Welcome to the Server, <@{member.id}>. Enjoy your stay!")
     
 
 @bot.event
 async def on_member_remove(member):
-    await member.guild.get_channel(416870728839856129).send(f"Just left **{member.guild}**, {member.mention}. Hope you enjoyed your stay!")
+    await member.guild.get_channel(416870728839856129)(f"Just left **{member.guild}**, {member.mention}. Hope you enjoyed your stay!")
 
 
 @bot.command()
