@@ -228,13 +228,11 @@ async def coinflip(ctx):
     
     
 @bot.command()
-async def bomb(ctx):
-    message = 'Hi,Im just testing my DM bomber.'
-    user = await bot.get_user_info('user_id')
-    i=0
-    while i < 25:
-        await ctx.send(user, message)
-        i = i + 1 
+async def dick_length(ctx):
+  """Check how long is your dick before it grows cancer"""
+  await ctx.send(f'Dick size of {ctx.author} is 8{"=" * random.randint(0, 50)}D')
+    
+
 @bot.command(pass_context=True)
 async def type(ctx, user : str):
     await ctx.send(":typing: {} is typing...".format(user))
