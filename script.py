@@ -230,7 +230,9 @@ async def coinflip(ctx):
 @bot.command()
 async def dick_length(ctx):
   """Check how long is your dick before it grows cancer"""
-  await ctx.send(f'Dick size of {ctx.author} is 8{"=" * random.randint(0, 50)}D')
+    embed=discord.Embed(color=00000)
+    await ctx.send(f'Dick size of {ctx.author} is 8{"=" * random.randint(0, 50)}D')
+    await ctx.send(embed=embed)
     
 
 @bot.command(pass_context=True)
