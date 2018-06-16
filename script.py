@@ -230,6 +230,21 @@ async def coinflip(ctx):
 @bot.command()
 async def dick_length(ctx):
   """Check how long is your dick before it grows cancer"""
-  await ctx.send(f'Dick size of {ctx.author} is 8{"=" * random.randint(0, 50)}D')        
+  await ctx.send(f'Dick size of {ctx.author} is 8{"=" * random.randint(0, 50)}D')
+    
+    
+@bot.command()
+async def userinfo(ctx, member : discord.Member):
+    embed = discord.Embed(title="User Info for {}".format(member.name), colour=000000)
+    embed.add_field(name="Username:", value=member.name, inline=True)
+    embed.add_field(name="User ID:", value=member.id, inline=True)
+    embed.add_field(name="Is Bot:", value=member.bot)
+    embed.add_field(name="Created at:", value=member.created_at, inline=True)
+    embed.add_field(name="Nickname:", value=member.display_name)
+    embed.add_field(name='Status:', value=member.status, inline=True)
+    embed.add_field(name="Playing:", value=member.game)
+    embed.add_field(name="Highest Role:", value=member.top_role, inline=True)
+    embed.set_thumbnail(url=member.avatar_url)
+    await ctx.send(embed=embed)
         
 bot.run(os.getenv('TOKEN'))
