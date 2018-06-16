@@ -242,7 +242,7 @@ async def userinfo(ctx, member : discord.Member):
     embed.add_field(name="Created at:", value=member.created_at, inline=True)
     embed.add_field(name="Nickname:", value=member.display_name)
     embed.add_field(name='Status:', value=member.status, inline=True)
-    embed.add_field(name="Playing:", value=member.game)
+    embed.add_field(name="Playing:", value=member.activity)
     embed.add_field(name="Highest Role:", value=member.top_role, inline=True)
     embed.set_thumbnail(url=member.avatar_url)
     await ctx.send(embed=embed)
