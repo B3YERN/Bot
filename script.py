@@ -323,7 +323,6 @@ async def ftn(ctx, platform = None,*, player = None):
             SoloKPG = Solo["kpg"]
             SoloTop10 = Solo["top10"]
  
-
 @bot.command()
 async def dick_length(ctx):
   """Check how long is your dick before it grows cancer"""
