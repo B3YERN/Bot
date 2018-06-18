@@ -267,8 +267,8 @@ async def coinflip(ctx):
     embed=discord.Embed(title='**Coinflip**', description='The coin landed on {}!'.format(random.choice(coin)), color=0x3b1261)
     await ctx.channel.send(embed=embed)
     
-@bot.command(ctx, member:discord.Member)
-async def hacjban
+@bot.command()
+async def hackban(ctx, member:discord.Member)
 fake_member = discord.Object(id=userid)
 await ctx.guild.ban(fake_member)
 
