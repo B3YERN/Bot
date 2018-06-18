@@ -177,7 +177,7 @@ async def dolphin(ctx):
     """Dolphin is love, Dolphin is life."""
     await ctx.send(random.choice(["https://cdn.discordapp.com/attachments/411463762445598720/418670078951686144/dolphin.gif", "https://media.giphy.com/media/FR3IRCWC9faRG/giphy.gif", "http://i0.kym-cdn.com/photos/images/original/000/238/610/3fe.gif"]))
 
-@client.command()
+@bot.command()
 async def warn(ctx, member: discord.Member = None,*, reason="Please read the rules again!"):
     """Warns a user (staff-only)"""
     if not ("Staff" in [role.name for role in ctx.message.author.roles]):
