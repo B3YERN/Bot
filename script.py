@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import asyncio
+import requests
 import random
 import time
 import traceback
