@@ -337,7 +337,7 @@ async def ftn(ctx, platform = None,*, player = None):
             SoloKPG = Solo["kpg"]
             SoloTop10 = Solo["top10"]
  
-           SoloTop25 = Solo["top25"]
+            SoloTop25 = Solo["top25"]
 
             embed = discord.Embed(colour=0xE9A72F)
             embed.set_author(icon_url="https://i.ebayimg.com/images/g/6ekAAOSw3WxaO8mr/s-l300.jpg", name="Solo stats:")
