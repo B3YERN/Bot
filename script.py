@@ -321,13 +321,7 @@ async def ftn(ctx, platform = None,*, player = None):
             SoloKills = Solo["kills"]
             SoloMatches = Solo["matches"]
             SoloKPG = Solo["kpg"]
-            SoloTop10 = Solo["top10"]
- 
-@bot.command()
-async def dick_length(ctx):
-  """Check how long is your dick before it grows cancer"""
-  await ctx.send(f'Dick size of {ctx.author} is 8{"=" * random.randint(0, 50)}D')
-    
+            SoloTop10 = Solo["top10"]   
     
 @bot.command()
 async def userinfo(ctx, member : discord.Member):
