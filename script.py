@@ -8,6 +8,7 @@ import logging
 import os
 import json
 import inspect
+import requests
 bot = commands.Bot (command_prefix = "m. ")
 client = discord.Client()
 
