@@ -6,6 +6,7 @@ import time
 import traceback
 import logging
 import os
+import inspect
 bot = commands.Bot (command_prefix = "m. ")
 client = discord.Client()
 
@@ -61,6 +62,17 @@ async def uptime(ctx):
     embed.add_field(name="__Bots Uptime!__", value=f"Week: {week},\nDay: {day},\nHours: {hour},\nMinutes: {minute},\nSeconds: {second}")
     embed.set_footer(text="Memes Bot™ | Uptime Status!")
     await ctx.send(embed=embed)
+    
+@bot.command()
+@commands.is_owner()
+async def source(ctx, *, text: str, inspect=None):
+    """Shows source code of a command."""
+    nl2 = '`'
+    nl = f"``{nl2}"
+    source_thing = inspect.getsource(bot.get_command(text).callback)
+    await ctx.send(f"{nl}py\n{source_thing}{nl}") 
+    
+   
 @bot.command()
 async def RDNG(ctx, dices):
     """Pick a random number generator."""
