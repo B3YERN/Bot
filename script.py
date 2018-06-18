@@ -6,6 +6,7 @@ import time
 import traceback
 import logging
 import os
+import json
 import inspect
 bot = commands.Bot (command_prefix = "m. ")
 client = discord.Client()
@@ -176,15 +177,43 @@ async def dolphin(ctx):
     """Dolphin is love, Dolphin is life."""
     await ctx.send(random.choice(["https://cdn.discordapp.com/attachments/411463762445598720/418670078951686144/dolphin.gif", "https://media.giphy.com/media/FR3IRCWC9faRG/giphy.gif", "http://i0.kym-cdn.com/photos/images/original/000/238/610/3fe.gif"]))
 
-@bot.command()
-async def warn(ctx, user: discord.Member, *, reason: str):
-    """Warns the client straight away"""
-    await ctx.send(f'{ctx.author.mention} You have successfully warned **{user.mention}** for `{reason}`.')
-    await ctx.send(f'{user} You have been warned for `{reason}` in `{ctx.guild.name}`.')
-    warning = open("warned.txt", "a+")
-    warning.write(f' {user} has been warned for `{reason}` `this was done by {ctx.author.mention}`') 
-    warning.close()
-    await ctx.send(f":warning: {user.mention} had been warned")      
+@client.command()
+async def warn(ctx, member: discord.Member = None,*, reason="Please read the rules again!"):
+    """Warns a user (staff-only)"""
+    if not ("Staff" in [role.name for role in ctx.message.author.roles]):
+        embed=discord.Embed(title='No perms!', description='Sorry you dont have perms to do this!', color=000000)
+        return await ctx.send(embed=embed)
+    if member == None:
+        embed = discord.Embed(title='How to use',color=mc, description='Guide on how to warn: do `%warn <member> [reason]` where <> is requiered and [] is optinal.')
+        return await ctx.send(embed=embed)
+    if len(warnmngr.get_warns(userid=member.id)) == 2:
+        embed=discord.Embed(title='You got kicked!', description='Due to lots of warns u have been kicked... u can re-join at https://discord.st/ItzEpicDev thou xD', color=mc)
+        try:
+            await member.send(embed=embed)
+        except:
+            pass    
+        await member.kick(member)
+    if len(warnmngr.get_warns(userid=member.id)) == 5:
+        embed=discord.Embed(title='Cya m8', description='Due to rule breaking we auto banned u. mail ItzEpicHosting@gmail.com or pm EpicShardGamingYT#9597 to get urself unbanned!', color=mc)
+        try:
+            await member.send(embed=embed)
+        except:
+            pass
+        await ctx.guild.ban(member)
+    try:
+        warnmngr.warn(member.name, member.id, reason)
+        embed=discord.Embed(title='WARNED', description='{} has been warned successfully!'.format(member.name), color=mc)
+        await ctx.send(embed=embed)
+        embed=discord.Embed(title='WARNED', description=f"You got warned by {ctx.message.author.name} for {reason}!", color=mc)
+        try:
+            await member.send(embed=embed)
+        except:
+            pass
+    except Exception as e:
+        embed=discord.Embed(title='UUPS', description='Something went wrong... We reported it to the devs to take care!', color=mc)
+        await ctx.send(embed=embed)
+        print("EXEPTION in warn!!! ")
+        raise(e)      
 
 @bot.command()
 @commands.is_owner()              
@@ -238,7 +267,68 @@ async def coinflip(ctx):
     embed=discord.Embed(title='**Coinflip**', description='The coin landed on {}!'.format(random.choice(coin)), color=0x3b1261)
     await ctx.channel.send(embed=embed)
     
-    
+@bot.command(ctx, member:discord.Member)
+async def hacjban
+fake_member = discord.Object(id=userid)
+await ctx.guild.ban(fake_member)
+
+@bot.command()
+async def warns(ctx, member: discord.Member = None):
+    """
+    Checks the warns of a user (staff-only)
+    """
+    if not ("Staff" in [role.name for role in ctx.message.author.roles]):
+        embed=discord.Embed(title='No perms!', description='Sorry you dont have perms to do this!', color=mc)
+        return await ctx.send(embed=embed)
+    if member == None:
+        embed = discord.Embed(title='How to use',color=mc, description='Guide on how to see the users warns: do `%warns <member>`')
+        return await ctx.send(embed=embed)
+    warnlist = warnmngr.get_warns(userid=member.id)
+    embed=discord.Embed(title=f'Warns for {member.name}', color=mc)
+    newWarns = []
+    for i in range(len(warnlist)):
+        cw = warnlist[i]
+    embed.add_field(name=str(i+1), value=str(cw[2]), inline=False)
+   await ctx.send(embed=embed)
+
+
+@bot.command(aliases=["fortnite", "fort", "fn"])
+    async def ftn(ctx, platform = None,*, player = None):
+        if platform is None:
+            el = discord.Embed(title="Error:", description="You didn't specify a platform: w/ftn <platform> <username>", color=0xE73C24)
+            return await ctx.send(embed=el)  # Adding return here ends the script from executing further within the func.
+        if player is None:
+            ell = discord.Embed(title="Error:", description="You didn't specify a username: w/ftn <platform> <username>", color=0xE73C24)
+            return await ctx.send(embed=ell)
+
+        msg = await ctx.send("This command can be very slow, please be patient :slight_smile:")
+        headers = {'TRN-Api-Key': '5d24cc04-926b-4922-b864-8fd68acf482e'}
+        r = requests.get('https://api.fortnitetracker.com/v1/profile/{}/{}'.format(platform, player), headers=headers)
+        stats = json.loads(r.text)
+        stats = stats["stats"]
+
+        # What we want to do here is create a list of three Embeds to send. You're going to treat each section of the JSON response individually.
+        # Instead of viewing the error as a whole, we can see each "p" section (p2, p9, etc) as its own response, by setting up three try/except blocks.
+        # If one is successful, we move on to the next. Same goes if one fails.
+        # At the end, we'll check to see if ALL of them failed, and if so, that account does not exist.
+        # This way, as long as one response is valid, the command returns successfully.
+
+        list_of_embeds = []
+
+        # Solos
+        try:
+            Solo = stats["p2"]
+            KDSolo = Solo["kd"]
+            KDSolovalue = KDSolo["value"]
+            TRNSoloRanking = Solo["trnRating"]
+            winsDataSolo = Solo["top1"]
+            Soloscore = Solo["score"]
+            SoloKills = Solo["kills"]
+            SoloMatches = Solo["matches"]
+            SoloKPG = Solo["kpg"]
+            SoloTop10 = Solo["top10"]
+ 
+
 @bot.command()
 async def dick_length(ctx):
   """Check how long is your dick before it grows cancer"""
