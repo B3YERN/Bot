@@ -285,43 +285,7 @@ async def warns(ctx, member: discord.Member = None):
         cw = warnlist[i]
     embed.add_field(name=str(i+1), value=str(cw[2]), inline=False)
     await ctx.send(embed=embed)
-
-
-@bot.command(aliases=["fortnite", "fort", "fn"])
-async def ftn(ctx, platform = None,*, player = None):
-        if platform is None:
-            el = discord.Embed(title="Error:", description="You didn't specify a platform: w/ftn <platform> <username>", color=0xE73C24)
-            return await ctx.send(embed=el)  # Adding return here ends the script from executing further within the func.
-        if player is None:
-            ell = discord.Embed(title="Error:", description="You didn't specify a username: w/ftn <platform> <username>", color=0xE73C24)
-            return await ctx.send(embed=ell)
-
-        msg = await ctx.send("This command can be very slow, please be patient :slight_smile:")
-        headers = {'TRN-Api-Key': '5d24cc04-926b-4922-b864-8fd68acf482e'}
-        r = requests.get('https://api.fortnitetracker.com/v1/profile/{}/{}'.format(platform, player), headers=headers)
-        stats = json.loads(r.text)
-        stats = stats["stats"]
-
-        # What we want to do here is create a list of three Embeds to send. You're going to treat each section of the JSON response individually.
-        # Instead of viewing the error as a whole, we can see each "p" section (p2, p9, etc) as its own response, by setting up three try/except blocks.
-        # If one is successful, we move on to the next. Same goes if one fails.
-        # At the end, we'll check to see if ALL of them failed, and if so, that account does not exist.
-        # This way, as long as one response is valid, the command returns successfully.
-
-        list_of_embeds = []
-
-        # Solos
-        try:
-            Solo = stats["p2"]
-            KDSolo = Solo["kd"]
-            KDSolovalue = KDSolo["value"]
-            TRNSoloRanking = Solo["trnRating"]
-            winsDataSolo = Solo["top1"]
-            Soloscore = Solo["score"]
-            SoloKills = Solo["kills"]
-            SoloMatches = Solo["matches"]
-            SoloKPG = Solo["kpg"]
-            SoloTop10 = Solo["top10"]   
+ 
     
 @bot.command()
 async def userinfo(ctx, member : discord.Member):
