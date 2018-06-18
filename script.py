@@ -374,8 +374,7 @@ async def ftn(ctx, platform = None,*, player = None):
             duo = discord.Embed(color=0xE9A72F)
             duo.set_author(icon_url="https://i.ebayimg.com/images/g/6ekAAOSw3WxaO8mr/s-l300.jpg", name="Duo stats:")
             duo.add_field(name="K/D", value=KDDuovalue)
-            duo.add_field
-(name="Score", value=Duoscore["value"])
+            duo.add_field(name="Score", value=Duoscore["value"])
             duo.add_field(name="Wins", value=winsDataDuo["value"])
             duo.add_field(name="TRN Rating", value=TRNDuoRanking["value"])
             duo.add_field(name="Kills", value=DuoKills["value"], inline=True)
