@@ -284,7 +284,7 @@ async def warns(ctx, member: discord.Member = None):
     for i in range(len(warnlist)):
         cw = warnlist[i]
     embed.add_field(name=str(i+1), value=str(cw[2]), inline=False)
-   await ctx.send(embed=embed)
+    await ctx.send(embed=embed)
 
 
 @bot.command(aliases=["fortnite", "fort", "fn"])
