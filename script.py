@@ -411,8 +411,7 @@ async def ftn(ctx, platform = None,*, player = None):
             squad.add_field(name="Kills Per Game:", value=SquadKPG["value"], inline=True)
             squad.add_field(name="Top 3:", value=SquadTop3["value"])
             squad.add_field(name="Top 6:", value=SquadTop6["value"])
-            list_o
-f_embeds.append(squad)
+            list_of_embeds.append(squad)
         except KeyError:
             pass
 
