@@ -65,7 +65,7 @@ async def uptime(ctx):
     
 @bot.command()
 @commands.is_owner()
-async def source(ctx, *, text: str, inspect=None):
+async def source(ctx, *, text: str):
     """Shows source code of a command."""
     nl2 = '`'
     nl = f"``{nl2}"
