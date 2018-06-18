@@ -288,7 +288,7 @@ async def warns(ctx, member: discord.Member = None):
 
 
 @bot.command(aliases=["fortnite", "fort", "fn"])
-    async def ftn(ctx, platform = None,*, player = None):
+async def ftn(ctx, platform = None,*, player = None):
         if platform is None:
             el = discord.Embed(title="Error:", description="You didn't specify a platform: w/ftn <platform> <username>", color=0xE73C24)
             return await ctx.send(embed=el)  # Adding return here ends the script from executing further within the func.
