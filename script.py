@@ -224,7 +224,7 @@ async def die(ctx):
         await ctx.send("Shutting down...")
         await bot.logout()        
         
-@bot.command(aliases=["memes")
+@bot.command(aliases=["memes"])
 async def meme(ctx):
     """You gonna enjoy some shitpost"""
     embed = discord.Embed(colour=000000)
