@@ -146,7 +146,7 @@ async def kick(ctx, *, member : discord.Member = None):
 @bot.command()
 async def mute(ctx, member:discord.Member):
     """Mute the client on the server."""
-    if "Furry boii (Manager)" in [role.name for role in ctx.author.roles]:
+    if "Staff" in [role.name for role in ctx.author.roles]:
         await ctx.message.delete()
         role = discord.utils.get(ctx.guild.roles, name="Muted")
         await member.add_roles(role)
@@ -158,7 +158,7 @@ async def mute(ctx, member:discord.Member):
 @bot.command()
 async def unmute(ctx, member:discord.Member):
     """Unmute the client on the server."""
-    if "Furry boii (Manager)" in [role.name for role in ctx.author.roles]:
+    if "Staff" in [role.name for role in ctx.author.roles]:
         await ctx.message.delete()
         role = discord.utils.get(ctx.guild.roles, name="Muted")
         await member.remove_roles(role)
@@ -280,7 +280,7 @@ async def warns(ctx, member: discord.Member = None):
         embed = discord.Embed(title='How to use',color=mc, description='Guide on how to see the users warns: do `%warns <member>`')
         return await ctx.send(embed=embed)
     warnlist = warnmngr.get_warns(userid=member.id)
-    embed=discord.Embed(title=f'Warns for {member.name}', color=mc)
+    embed=discord.Embed(title=f'Warns for {member.name}', color=000000)
     newWarns = []
     for i in range(len(warnlist)):
         cw = warnlist[i]
