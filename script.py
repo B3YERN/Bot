@@ -26,7 +26,7 @@ async def on_command_error(ctx, error):
     else:
         embed = discord.Embed(title="Error:",
                               description=f"{error}",
-                              colour=0xe73c24)
+                              colour=000000)
         await ctx.send(embed=embed)
 
 
@@ -60,7 +60,7 @@ async def uptime(ctx):
     hour, minute = divmod(minute, 60)
     day, hour = divmod(hour, 24)
     week, day = divmod(day, 7)
-    embed = discord.Embed(colour=0x2EFF00)
+    embed = discord.Embed(colour=000000)
     embed.add_field(name="__Bots Uptime!__", value=f"Week: {week},\nDay: {day},\nHours: {hour},\nMinutes: {minute},\nSeconds: {second}")
     embed.set_footer(text="Memes Bot™ | Uptime Status!")
     await ctx.send(embed=embed)
@@ -188,14 +188,14 @@ async def warn(ctx, member: discord.Member = None,*, reason="Please read the rul
         embed = discord.Embed(title='How to use',color=mc, description='Guide on how to warn: do `%warn <member> [reason]` where <> is requiered and [] is optinal.')
         return await ctx.send(embed=embed)
     if len(warnmngr.get_warns(userid=member.id)) == 2:
-        embed=discord.Embed(title='You got kicked!', description='Due to lots of warns u have been kicked... u can re-join at https://discord.st/ItzEpicDev thou xD', color=mc)
+        embed=discord.Embed(title='You got kicked!', description='Due to lots of warns u have been kicked... u can re-join at https://discord.gg/dQEatw4 thou xD', color=000000)
         try:
             await member.send(embed=embed)
         except:
             pass    
         await member.kick(member)
     if len(warnmngr.get_warns(userid=member.id)) == 5:
-        embed=discord.Embed(title='Cya m8', description='Due to rule breaking we auto banned u. mail ItzEpicHosting@gmail.com or pm EpicShardGamingYT#9597 to get urself unbanned!', color=mc)
+        embed=discord.Embed(title='Cya m8', description='Due to rule breaking we decided to auto banned you. DM 9oXD in Kikto get yourself unbanned!', color=000000)
         try:
             await member.send(embed=embed)
         except:
@@ -203,15 +203,15 @@ async def warn(ctx, member: discord.Member = None,*, reason="Please read the rul
         await ctx.guild.ban(member)
     try:
         warnmngr.warn(member.name, member.id, reason)
-        embed=discord.Embed(title='WARNED', description='{} has been warned successfully!'.format(member.name), color=mc)
+        embed=discord.Embed(title='WARNED', description='{} has been warned successfully!'.format(member.name), color=000000)
         await ctx.send(embed=embed)
-        embed=discord.Embed(title='WARNED', description=f"You got warned by {ctx.message.author.name} for {reason}!", color=mc)
+        embed=discord.Embed(title='WARNED', description=f"You got warned by {ctx.message.author.name} for {reason}!", color=000000)
         try:
             await member.send(embed=embed)
         except:
             pass
     except Exception as e:
-        embed=discord.Embed(title='UUPS', description='Something went wrong... We reported it to the devs to take care!', color=mc)
+        embed=discord.Embed(title='UUPS', description='Something went wrong... We reported it to the team to take care!', color=000000)
         await ctx.send(embed=embed)
         print("EXEPTION in warn!!! ")
         raise(e)      
@@ -258,14 +258,14 @@ async def avatar(ctx,*,user:discord.Member=None):
 
 @bot.command()
 async def say(ctx, *, message):
-    """Whatever the fuck you say, bot will say it aswell"""
+    """Whatever the fuck you say and  bot will say it aswell"""
     await ctx.send(message)
     
 @bot.command(pass_context=True)
 async def coinflip(ctx):
     """Flip the coin for luck"""
     coin = ['Heads', 'Tails']
-    embed=discord.Embed(title='**Coinflip**', description='The coin landed on {}!'.format(random.choice(coin)), color=0x3b1261)
+    embed=discord.Embed(title='**Coinflip**', description='The coin landed on {}!'.format(random.choice(coin)), color=000000)
     await ctx.channel.send(embed=embed)
 
 @bot.command()
@@ -274,7 +274,7 @@ async def warns(ctx, member: discord.Member = None):
     Checks the warns of a user (staff-only)
     """
     if not ("Staff" in [role.name for role in ctx.message.author.roles]):
-        embed=discord.Embed(title='No perms!', description='Sorry you dont have perms to do this!', color=mc)
+        embed=discord.Embed(title='No perms!', description='Sorry you dont have perms to do this!', color=000000)
         return await ctx.send(embed=embed)
     if member == None:
         embed = discord.Embed(title='How to use',color=mc, description='Guide on how to see the users warns: do `%warns <member>`')
@@ -305,10 +305,10 @@ async def userinfo(ctx, member : discord.Member):
 @bot.command(aliases=["fortnite", "fort", "fn" , "fnstats"])
 async def ftn(ctx, platform = None,*, player = None):
         if platform is None:
-            el = discord.Embed(title="Error:", description="You didn't specify a platform: w/ftn <platform> <username>", color=0xE73C24)
+            el = discord.Embed(title="Error:", description="You didn't specify a platform: w/ftn <platform> <username>", color=000000)
             return await ctx.send(embed=el)  # Adding return here ends the script from executing further within the func.
         if player is None:
-            ell = discord.Embed(title="Error:", description="You didn't specify a username: w/ftn <platform> <username>", color=0xE73C24)
+            ell = discord.Embed(title="Error:", description="You didn't specify a username: w/ftn <platform> <username>", color=000000)
             return await ctx.send(embed=ell)
 
         msg = await ctx.send("This command can be very slow, please be patient :slight_smile:")
@@ -432,9 +432,9 @@ async def ftn(ctx, platform = None,*, player = None):
                 await ctx.send(embed=embed)
                 
                 
-@commands.command(aliases=["si", "serverinformation"])
+@bot.command(aliases=["si", "serverinformation"])
 async def serverinfo(ctx):
-        embed = discord.Embed(color=0xE9A72F)
+        embed = discord.Embed(color=000000)
         embed.set_author(icon_url=ctx.message.guild.icon_url, name="{}'s info".format(ctx.message.guild.name))
         embed.add_field(name="Name:", value=ctx.message.guild.name, inline=True)
         embed.add_field(name="ID:", value=ctx.message.guild.id, inline=True)
