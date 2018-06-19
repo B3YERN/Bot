@@ -224,7 +224,7 @@ async def die(ctx):
         await ctx.send("Shutting down...")
         await bot.logout()        
         
-@bot.command()
+@bot.command(aliases=["memes")
 async def meme(ctx):
     """You gonna enjoy some shitpost"""
     embed = discord.Embed(colour=000000)
@@ -288,150 +288,140 @@ async def warns(ctx, member: discord.Member = None):
     await ctx.send(embed=embed)
  
     
-@bot.command()
-async def userinfo(ctx, member : discord.Member):
-    embed = discord.Embed(title="User Info for {}".format(member.name), colour=000000)
-    embed.add_field(name="Username:", value=member.name, inline=True)
-    embed.add_field(name="User ID:", value=member.id, inline=True)
-    embed.add_field(name="Is Bot:", value=member.bot)
-    embed.add_field(name="Created at:", value=member.created_at, inline=True)
-    embed.add_field(name="Nickname:", value=member.display_name)
-    embed.add_field(name='Status:', value=member.status, inline=True)
-    embed.add_field(name="Playing:", value=member.activity)
-    embed.add_field(name="Highest Role:", value=member.top_role, inline=True)
-    embed.set_thumbnail(url=member.avatar_url)
-    await ctx.send(embed=embed)
-   
-@bot.command(aliases=["fortnite", "fort", "fn" , "fnstats"])
-async def ftn(ctx, platform = None,*, player = None):
-        if platform is None:
-            el = discord.Embed(title="Error:", description="You didn't specify a platform: w/ftn <platform> <username>", color=000000)
-            return await ctx.send(embed=el)  # Adding return here ends the script from executing further within the func.
-        if player is None:
-            ell = discord.Embed(title="Error:", description="You didn't specify a username: w/ftn <platform> <username>", color=000000)
-            return await ctx.send(embed=ell)
+@bot.command(aliases=["fortnite", "fort", "fn", "fnstats"])
+async def ftn(ctx, platform=None, *, player=None):
+    if platform is None:
+        el = discord.Embed(title="Error:", description="You didn't specify a platform: w/ftn <platform> <username>",
+                           color=000000)
+        return await ctx.send(embed=el)  # Adding return here ends the script from executing further within the func.
+    if player is None:
+        ell = discord.Embed(title="Error:", description="You didn't specify a username: w/ftn <platform> <username>",
+                            color=000000)
+        return await ctx.send(embed=ell)
 
-        msg = await ctx.send("This command can be very slow, please be patient :slight_smile:")
-        headers = {'TRN-Api-Key': '5d24cc04-926b-4922-b864-8fd68acf482e'}
-        r = requests.get('https://api.fortnitetracker.com/v1/profile/{}/{}'.format(platform, player), headers=headers)
-        stats = json.loads(r.text)
-        stats = stats["stats"]
+    msg = await ctx.send("This command can be very slow, please be patient :slight_smile:")
+    headers = {'TRN-Api-Key': '6213ef07-38e1-4520-8c1a-93f756016770'}
+    r = requests.get(f'https://api.fortnitetracker.com/v1/profile/{platform}/{player}', headers=headers)
+    stats = json.loads(r.text)
+    stats = stats["stats"]
 
-        # What we want to do here is create a list of three Embeds to send. You're going to treat each section of the JSON response individually.
-        # Instead of viewing the error as a whole, we can see each "p" section (p2, p9, etc) as its own response, by setting up three try/except blocks.
-        # If one is successful, we move on to the next. Same goes if one fails.
-        # At the end, we'll check to see if ALL of them failed and if so, that account does not exist.
-        # This way, as long as one response is valid, the command returns successfully.
+    # What we want to do here is create a list of three Embeds to send. You're going to treat each section of the JSON response individually.
+    # Instead of viewing the error as a whole, we can see each "p" section (p2, p9, etc) as its own response, by setting up three try/except blocks.
+    # If one is successful, we move on to the next. Same goes if one fails.
+    # At the end, we'll check to see if ALL of them failed and if so, that account does not exist.
+    # This way, as long as one response is valid, the command returns successfully.
 
-        list_of_embeds = []
+    list_of_embeds = []
 
-        # Solos
-        try:
-            Solo = stats["p2"]
-            KDSolo = Solo["kd"]
-            KDSolovalue = KDSolo["value"]
-            TRNSoloRanking = Solo["trnRating"]
-            winsDataSolo = Solo["top1"]
-            Soloscore = Solo["score"]
-            SoloKills = Solo["kills"]
-            SoloMatches = Solo["matches"]
-            SoloKPG = Solo["kpg"]
-            SoloTop10 = Solo["top10"]
- 
-            SoloTop25 = Solo["top25"]
+    # Solos
+    try:
+        Solo = stats["p2"]
+        KDSolo = Solo["kd"]
+        KDSolovalue = KDSolo["value"]
+        TRNSoloRanking = Solo["trnRating"]
+        winsDataSolo = Solo["top1"]
+        Soloscore = Solo["score"]
+        SoloKills = Solo["kills"]
+        SoloMatches = Solo["matches"]
+        SoloKPG = Solo["kpg"]
+        SoloTop10 = Solo["top10"]
 
-            embed = discord.Embed(colour=0xE9A72F)
-            embed.set_author(icon_url="https://i.ebayimg.com/images/g/6ekAAOSw3WxaO8mr/s-l300.jpg", name="Solo stats:")
-            embed.add_field(name="K/D", value=KDSolovalue)
-            embed.add_field(name="Score", value=Soloscore["value"])
-            embed.add_field(name="Wins", value=winsDataSolo["value"])
-            embed.add_field(name="TRN Rating", value=TRNSoloRanking["value"])
-            embed.add_field(name="Kills", value=SoloKills["value"], inline=True)
-            embed.add_field(name="Matches Played:", value=SoloMatches["value"], inline=True)
-            embed.add_field(name="Kills Per Game:", value=SoloKPG["value"], inline=True)
-            embed.add_field(name="Top 10:", value=SoloTop10["value"])
-            embed.add_field(name="Top 25:", value=SoloTop25["value"])
-            list_of_embeds.append(embed)  # Using the list.append(item) command will add (append) an entry to a list, here a discord.Embed.
-        except KeyError:
-            pass  # Using a pass expression essentially tells the script "Ignore this and continue as usual".
+        SoloTop25 = Solo["top25"]
 
-        # As you can see, if things go well, we have one embed appended to the list. If not, we have none.
-        # We'll do this for the next two now.
+        embed = discord.Embed(colour=0xE9A72F)
+        embed.set_author(icon_url="https://i.ebayimg.com/images/g/6ekAAOSw3WxaO8mr/s-l300.jpg", name="Solo stats:")
+        embed.add_field(name="K/D", value=KDSolovalue)
+        embed.add_field(name="Score", value=Soloscore["value"])
+        embed.add_field(name="Wins", value=winsDataSolo["value"])
+        embed.add_field(name="TRN Rating", value=TRNSoloRanking["value"])
+        embed.add_field(name="Kills", value=SoloKills["value"], inline=True)
+        embed.add_field(name="Matches Played:", value=SoloMatches["value"], inline=True)
+        embed.add_field(name="Kills Per Game:", value=SoloKPG["value"], inline=True)
+        embed.add_field(name="Top 10:", value=SoloTop10["value"])
+        embed.add_field(name="Top 25:", value=SoloTop25["value"])
+        list_of_embeds.append(
+            embed)  # Using the list.append(item) command will add (append) an entry to a list, here a discord.Embed.
+    except KeyError:
+        pass  # Using a pass expression essentially tells the script "Ignore this and continue as usual".
 
-        # Duos
-        try:
-            Duo = stats["p10"]
-            KDDuo = Duo["kd"]
-            KDDuovalue = KDDuo["value"]
-            TRNDuoRanking = Duo["trnRating"]
-            winsDataDuo = Duo["top1"]
-            Duoscore = Duo["score"]
-            DuoKills = Duo["kills"]
-            DuoMatches = Duo["matches"]
-            DuoKPG = Duo["kpg"]
-            DuoTop5 = Duo["top5"]
-            DuoTop12 = Duo["top12"]
+    # As you can see, if things go well, we have one embed appended to the list. If not, we have none.
+    # We'll do this for the next two now.
 
-            duo = discord.Embed(color=0xE9A72F)
-            duo.set_author(icon_url="https://i.ebayimg.com/images/g/6ekAAOSw3WxaO8mr/s-l300.jpg", name="Duo stats:")
-            duo.add_field(name="K/D", value=KDDuovalue)
-            duo.add_field(name="Score", value=Duoscore["value"])
-            duo.add_field(name="Wins", value=winsDataDuo["value"])
-            duo.add_field(name="TRN Rating", value=TRNDuoRanking["value"])
-            duo.add_field(name="Kills", value=DuoKills["value"], inline=True)
-            duo.add_field(name="Matches Played:", value=DuoMatches["value"], inline=True)
-            duo.add_field(name="Kills Per Game:", value=DuoKPG["value"], inline=True)
-            duo.add_field(name="Top 5:", value=DuoTop5["value"])
-            duo.add_field(name="Top 12:", value=DuoTop12["value"])
-            list_of_embeds.append(duo)
-        except KeyError:
-            pass
+    # Duos
+    try:
+        Duo = stats["p10"]
+        KDDuo = Duo["kd"]
+        KDDuovalue = KDDuo["value"]
+        TRNDuoRanking = Duo["trnRating"]
+        winsDataDuo = Duo["top1"]
+        Duoscore = Duo["score"]
+        DuoKills = Duo["kills"]
+        DuoMatches = Duo["matches"]
+        DuoKPG = Duo["kpg"]
+        DuoTop5 = Duo["top5"]
+        DuoTop12 = Duo["top12"]
 
-        # Squads
-        try:
-            Squad = stats["p9"]
-            KDSquad = Squad["kd"]
-            KDSquadvalue = KDSquad["value"]
-            TRNSquadRanking = Squad["trnRating"]
-            winsDataSquad = Squad["top1"]
-            Squadscore = Squad["score"]
-            SquadKills = Squad["kills"]
-            SquadMatches = Squad["matches"]
-            SquadKPG = Squad["kpg"]
-            SquadTop3 = Squad["top3"]
-            SquadTop6 = Squad["top6"]
+        duo = discord.Embed(color=0xE9A72F)
+        duo.set_author(icon_url="https://i.ebayimg.com/images/g/6ekAAOSw3WxaO8mr/s-l300.jpg", name="Duo stats:")
+        duo.add_field(name="K/D", value=KDDuovalue)
+        duo.add_field(name="Score", value=Duoscore["value"])
+        duo.add_field(name="Wins", value=winsDataDuo["value"])
+        duo.add_field(name="TRN Rating", value=TRNDuoRanking["value"])
+        duo.add_field(name="Kills", value=DuoKills["value"], inline=True)
+        duo.add_field(name="Matches Played:", value=DuoMatches["value"], inline=True)
+        duo.add_field(name="Kills Per Game:", value=DuoKPG["value"], inline=True)
+        duo.add_field(name="Top 5:", value=DuoTop5["value"])
+        duo.add_field(name="Top 12:", value=DuoTop12["value"])
+        list_of_embeds.append(duo)
+    except KeyError:
+        pass
 
-            squad = discord.Embed(color=0xE9A72F)
-            squad.set_author(icon_url="https://i.ebayimg.com/images/g/6ekAAOSw3WxaO8mr/s-l300.jpg", name="Squad stats:")
-            squad.add_field(name="K/D", value=KDSquadvalue)
-            squad.add_field(name="Score", value=Squadscore["value"])
-            squad.add_field(name="Wins", value=winsDataSquad["value"])
-            squad.add_field(name="TRN Rating", value=TRNSquadRanking["value"])
-            squad.add_field(name="Kills", value=SquadKills["value"], inline=True)
-            squad.add_field(name="Matches Played:", value=SquadMatches["value"], inline=True)
-            squad.add_field(name="Kills Per Game:", value=SquadKPG["value"], inline=True)
-            squad.add_field(name="Top 3:", value=SquadTop3["value"])
-            squad.add_field(name="Top 6:", value=SquadTop6["value"])
-            list_of_embeds.append(squad)
-        except KeyError:
-            pass
+    # Squads
+    try:
+        Squad = stats["p9"]
+        KDSquad = Squad["kd"]
+        KDSquadvalue = KDSquad["value"]
+        TRNSquadRanking = Squad["trnRating"]
+        winsDataSquad = Squad["top1"]
+        Squadscore = Squad["score"]
+        SquadKills = Squad["kills"]
+        SquadMatches = Squad["matches"]
+        SquadKPG = Squad["kpg"]
+        SquadTop3 = Squad["top3"]
+        SquadTop6 = Squad["top6"]
 
-        # Now that we've gone through all three sections, we need to make sure that there is at least one embed that did not fail.
-        # Basically, we need to make sure that the list of embeds is not empty.
-    
-        if not list_of_embeds:  # For whatever reason, Python treats empty arrays as False literals. Use it to your advantage!
-            await msg.delete()
-            error = discord.Embed(color=0xE73C24)
-            error.add_field(name="Error:", value="Invalid username, please try again with another name")
-            await ctx.send(embed=error)
-            print(error)
-        else:
-            # If the embed list if not empty, we'll create a for loop and send each.
-            await msg.delete()
-            for embed in list_of_embeds:
-                await ctx.send(embed=embed)
-                
-                
+        squad = discord.Embed(color=0xE9A72F)
+        squad.set_author(icon_url="https://i.ebayimg.com/images/g/6ekAAOSw3WxaO8mr/s-l300.jpg", name="Squad stats:")
+        squad.add_field(name="K/D", value=KDSquadvalue)
+        squad.add_field(name="Score", value=Squadscore["value"])
+        squad.add_field(name="Wins", value=winsDataSquad["value"])
+        squad.add_field(name="TRN Rating", value=TRNSquadRanking["value"])
+        squad.add_field(name="Kills", value=SquadKills["value"], inline=True)
+        squad.add_field(name="Matches Played:", value=SquadMatches["value"], inline=True)
+        squad.add_field(name="Kills Per Game:", value=SquadKPG["value"], inline=True)
+        squad.add_field(name="Top 3:", value=SquadTop3["value"])
+        squad.add_field(name="Top 6:", value=SquadTop6["value"])
+        list_of_embeds.append(squad)
+    except KeyError:
+        pass
+
+    # Now that we've gone through all three sections, we need to make sure that there is at least one embed that did not fail.
+    # Basically, we need to make sure that the list of embeds is not empty.
+
+    if not list_of_embeds:  # For whatever reason, Python treats empty arrays as False literals. Use it to your advantage!
+        await msg.delete()
+        error = discord.Embed(color=0xE73C24)
+        error.add_field(name="Error:", value="Invalid username, please try again with another name")
+        await ctx.send(embed=error)
+        print(error)
+    else:
+        # If the embed list if not empty, we'll create a for loop and send each.
+        await msg.delete()
+        for embed in list_of_embeds:
+            await ctx.send(embed=embed)
+            
+            
+            
 @bot.command(aliases=["si", "serverinformation"])
 async def serverinfo(ctx):
         embed = discord.Embed(color=000000)
