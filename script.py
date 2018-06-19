@@ -442,7 +442,4 @@ async def serverinfo(ctx):
         embed.set_thumbnail(url=ctx.message.guild.icon_url)
         embed.set_footer(icon_url=ctx.message.guild.icon_url, text=f"{ctx.message.guild.name} | By: {ctx.guild.owner.name}#{ctx.guild.owner.discriminator}")
         await ctx.send(embed=embed)
-        
-        
-                
-bot.run(os.getenv('TOKEN'))
+
