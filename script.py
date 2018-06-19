@@ -302,7 +302,7 @@ async def userinfo(ctx, member : discord.Member):
     embed.set_thumbnail(url=member.avatar_url)
     await ctx.send(embed=embed)
    
-@bot.command(aliases=["fortnite", "fort", "fn"])
+@bot.command(aliases=["fortnite", "fort", "fn" , "fnstats"])
 async def ftn(ctx, platform = None,*, player = None):
         if platform is None:
             el = discord.Embed(title="Error:", description="You didn't specify a platform: w/ftn <platform> <username>", color=0xE73C24)
