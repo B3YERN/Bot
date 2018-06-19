@@ -328,7 +328,7 @@ async def ftn(ctx, platform=None, *, player=None):
 
         SoloTop25 = Solo["top25"]
 
-        embed = discord.Embed(colour=0xE9A72F)
+        embed = discord.Embed(colour=000000)
         embed.set_author(icon_url="https://i.ebayimg.com/images/g/6ekAAOSw3WxaO8mr/s-l300.jpg", name="Solo stats:")
         embed.add_field(name="K/D", value=KDSolovalue)
         embed.add_field(name="Score", value=Soloscore["value"])
@@ -361,7 +361,7 @@ async def ftn(ctx, platform=None, *, player=None):
         DuoTop5 = Duo["top5"]
         DuoTop12 = Duo["top12"]
 
-        duo = discord.Embed(color=0xE9A72F)
+        duo = discord.Embed(color=000000)
         duo.set_author(icon_url="https://i.ebayimg.com/images/g/6ekAAOSw3WxaO8mr/s-l300.jpg", name="Duo stats:")
         duo.add_field(name="K/D", value=KDDuovalue)
         duo.add_field(name="Score", value=Duoscore["value"])
@@ -390,7 +390,7 @@ async def ftn(ctx, platform=None, *, player=None):
         SquadTop3 = Squad["top3"]
         SquadTop6 = Squad["top6"]
 
-        squad = discord.Embed(color=0xE9A72F)
+        squad = discord.Embed(color=000000)
         squad.set_author(icon_url="https://i.ebayimg.com/images/g/6ekAAOSw3WxaO8mr/s-l300.jpg", name="Squad stats:")
         squad.add_field(name="K/D", value=KDSquadvalue)
         squad.add_field(name="Score", value=Squadscore["value"])
