@@ -432,4 +432,27 @@ async def ftn(ctx, platform = None,*, player = None):
                 await ctx.send(embed=embed)
                 
                 
+@commands.command(aliases=["si", "serverinformation"])
+async def serverinfo(ctx):
+        embed = discord.Embed(color=0xE9A72F)
+        embed.set_author(icon_url=ctx.message.guild.icon_url, name="{}'s info".format(ctx.message.guild.name))
+        embed.add_field(name="Name:", value=ctx.message.guild.name, inline=True)
+        embed.add_field(name="ID:", value=ctx.message.guild.id, inline=True)
+        embed.add_field(name="Region:", value=ctx.message.guild.region, inline=True)
+        embed.add_field(name="Members:", value=len(ctx.message.guild.members), inline=True)
+        embed.add_field(name="Humans:", value=ctx.message.guild.member_count, inline=True)
+        bot_count = sum(m.bot for m in ctx.guild.members)
+        embed.add_field(name="Bots:", value=bot_count, inline=True)
+        embed.add_field(name="Roles:", value=len(ctx.message.guild.roles), inline=True)
+        embed.add_field(name="Text channels:", value=len(ctx.guild.text_channels))
+        embed.add_field(name="Categories", value=len(ctx.guild.categories))
+        embed.add_field(name="Owner ID:", value=ctx.guild.owner.id)
+        embed.add_field(name="Server Created At:", value=str(ctx.guild.created_at)[:19], inline=True)
+        embed.add_field(name="Owner:", value=ctx.message.guild.owner, inline=True)
+        embed.set_thumbnail(url=ctx.message.guild.icon_url)
+        embed.set_footer(icon_url=ctx.message.guild.icon_url, text=f"{ctx.message.guild.name} | By: {ctx.guild.owner.name}#{ctx.guild.owner.discriminator}")
+        await ctx.send(embed=embed)
+        
+        
+                
 bot.run(os.getenv('TOKEN'))
